@@ -28,4 +28,4 @@ GameCopiesSchema
 });
 
 //Export model
-module.exports = mongoose.model('GameCopies', GameSchema);
+module.exports = mongoose.model('GameCopies', GameCopiesSchema);
