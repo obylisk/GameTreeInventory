@@ -6,7 +6,7 @@ var GameSchema = new Schema(
   {
     title: {type: String, required: true, max: 100},
     description: {type: String, required: false},
-    category: [{type: Schema.ObjectId, ref: 'Category'}]
+    category: [{type: Schema.ObjectId, ref: 'Category'}],
     price: {type: Number, required: true},
     numberOfCopies: {type: Number, required: true},
   }
