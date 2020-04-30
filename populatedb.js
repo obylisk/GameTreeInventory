@@ -83,31 +83,20 @@ function gameCopyCreate(game, status due_back, cb) {
 }
 
 
-function createGenreAuthors(cb) {
+function createCategories(cb) {
     async.series([
+
         function(callback) {
-          authorCreate('Patrick', 'Rothfuss', '1973-06-06', false, callback);
+          categoryCreate("Party", callback);
         },
         function(callback) {
-          authorCreate('Ben', 'Bova', '1932-11-8', false, callback);
+          categoryCreate("Kids", callback);
         },
         function(callback) {
-          authorCreate('Isaac', 'Asimov', '1920-01-02', '1992-04-06', callback);
+          categoryCreate("First Time", callback);
         },
         function(callback) {
-          authorCreate('Bob', 'Billings', false, false, callback);
-        },
-        function(callback) {
-          authorCreate('Jim', 'Jones', '1971-12-16', false, callback);
-        },
-        function(callback) {
-          genreCreate("Fantasy", callback);
-        },
-        function(callback) {
-          genreCreate("Science Fiction", callback);
-        },
-        function(callback) {
-          genreCreate("French Poetry", callback);
+          categoryCreate("Strategy", callback);
         },
         ],
         // optional callback
