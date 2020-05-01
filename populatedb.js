@@ -81,7 +81,7 @@ function gameCopyCreate(game, due_back, status, cb) {
       return
     }
     console.log('New Game Copy: ' + gamecopy);
-    gamecopies.push(gamecopy)
+    gamecopies.push(gamecopy);
     cb(null, game)
   }  );
 }
@@ -122,6 +122,12 @@ function createGameCopies(cb) {
     async.parallel([
         function(callback) {
           gameCopyCreate(games[0], 'Available', callback)
+        },
+        function(callback) {
+          gameCopyCreate(games[0], 'Available', callback)
+        },
+        function(callback) {
+          gameCopyCreate(games[0], 'Available', callback)
         }
         ],
         // Optional callback
@@ -131,7 +137,7 @@ function createGameCopies(cb) {
 
 
 async.series([
-
+    createCategories,
     createGames
 ],
 // Optional callback
@@ -140,7 +146,7 @@ function(err, results) {
         console.log('FINAL ERR: '+err);
     }
     else {
-        console.log('GAMECopies: '+gamecopies);
+        console.log('Done');
 
     }
     // All done, disconnect from database
