@@ -8,7 +8,7 @@ var GameCopiesSchema = new Schema(
     // Reference to the associated game.
     game: { type: Schema.ObjectId, ref: 'Game', required: true },
     status: {type: String, required: true, enum:['Available', 'Rented'], default:'Available'},
-    due_back: { type: Date, default: " " },
+    due_back: { type: Date },
   });
 
 

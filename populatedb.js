@@ -59,17 +59,18 @@ if (category != false) gamedetail.category = category
       return
     }
     console.log('New Game: ' + game);
-    authors.push(game)
+    games.push(game)
     cb(null, game)
   });
 }
 
 
 
-function gameCopyCreate(game, status, due_back, cb) {
+function gameCopyCreate(game, due_back, status, cb) {
   gamecopydetail = {
     game: game,
   }
+  if (due_back != false) gamecopydetail.due_back = due_back
   if (status != false) gamecopydetail.status = status
 
   var gamecopy = new GameCopy(gamecopydetail);
@@ -87,18 +88,18 @@ function gameCopyCreate(game, status, due_back, cb) {
 
 
 function createCategories(cb) {
-    async.series([
+    async.parallel([
         function(callback) {
-          categoryCreate("Party", callback);
+          categoryCreate('Party', callback);
         },
         function(callback) {
-          categoryCreate("Kids", callback);
+          categoryCreate('Kids', callback);
         },
         function(callback) {
-          categoryCreate("First Time", callback);
+          categoryCreate('First Time', callback);
         },
         function(callback) {
-          categoryCreate("Strategy", callback);
+          categoryCreate('Strategy', callback);
         },
         ],
         // optional callback
@@ -109,7 +110,7 @@ function createCategories(cb) {
 function createGames(cb) {
     async.parallel([
         function(callback) {
-          gameCreate('Ultimate One Night Werewolf)', 'Social deduction games such', 'Party', 50, 3, callback);
+          gameCreate('Ultimate One Night Werewolf', 'Social deduction games suck', [categories[0],], 50, 3, callback);
         },
         ],
         // optional callback
@@ -130,9 +131,8 @@ function createGameCopies(cb) {
 
 
 async.series([
-    createCategories,
-    createGames,
-    createGameCopies
+
+    createGames
 ],
 // Optional callback
 function(err, results) {

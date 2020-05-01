@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var CategoriesSchema = new Schema(
+var CategorySchema = new Schema(
   {
     name: {type: String, required: true, min: 3, max: 100}
 });
@@ -10,7 +10,7 @@ var CategoriesSchema = new Schema(
 
 
 // Virtual for game's URL
-CategoriesSchema
+CategorySchema
 .virtual('url')
 .get(function () {
   return '/invetory/categories/' + this._id;
@@ -19,4 +19,4 @@ CategoriesSchema
 
 
 //Export model
-module.exports = mongoose.model('Categories', CategoriesSchema);
+module.exports = mongoose.model('Categories', CategorySchema);
