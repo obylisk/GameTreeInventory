@@ -91,7 +91,7 @@ function createGames(cb) {
           gameCreate('Exploding Kittens', 'Kittens were harmed in the making of this game.', [categories[0],], 20, 1, callback);
         },
         function(callback) {
-          gameCreate('Avalon', `"I'm a spy, or am I?"`, [categories[0],], 25, 1, callback);
+          gameCreate('Avalon', `I'm a spy, or am I?`, [categories[0],], 25, 1, callback);
         },
         function(callback) {
           gameCreate('Skull', 'A bluffing game made out of coaster mats.', [categories[0],], 7, 1, callback);
