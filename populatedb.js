@@ -45,10 +45,11 @@ function gameCreate(title, description, category, price, numberOfCopies, cb) {
   gamedetail = {
     title: title,
     description: description,
-    category: category,
     price: price,
     numberOfCopies: numberOfCopies
 }
+
+if (category != false) gamedetail.category = category
 
   var game = new Game(gamedetail);
 
