@@ -7,6 +7,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//Imports routes for "inventory" area of site
+var inventoryRouter = require("./routes/inventory");
+
 var app = express();
 
 //Set up mongoose connection
@@ -28,6 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//Add inventory routes to middleware chain.
+app.use('/inventory', inventoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
