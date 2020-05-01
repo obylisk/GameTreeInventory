@@ -12,7 +12,6 @@ if (!userArgs[0].startsWith('mongodb')) {
 */
 var async = require('async')
 var Game = require('./models/game')
-var GameCopy = require('./models/gamecopy')
 var Category = require('./models/category')
 
 
@@ -24,7 +23,6 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var games = []
-var gamecopies = []
 var categories = []
 
 function categoryCreate(name, cb) {
@@ -64,31 +62,8 @@ if (category != false) gamedetail.category = category
   });
 }
 
-
-
-function gameCopyCreate(game, due_back, status, cb) {
-  gamecopydetail = {
-    game: game,
-  }
-  if (due_back != false) gamecopydetail.due_back = due_back
-  if (status != false) gamecopydetail.status = status
-
-  var gamecopy = new GameCopy(gamecopydetail);
-  gamecopy.save(function (err) {
-    if (err) {
-      console.log('ERROR CREATING Game Copy: ' + gamecopy);
-      cb(err, null)
-      return
-    }
-    console.log('New Game Copy: ' + gamecopy);
-    gamecopies.push(gamecopy);
-    cb(null, game)
-  }  );
-}
-
-
 function createCategories(cb) {
-    async.parallel([
+    async.series([
         function(callback) {
           categoryCreate('Party', callback);
         },
@@ -110,27 +85,68 @@ function createCategories(cb) {
 function createGames(cb) {
     async.parallel([
         function(callback) {
-          gameCreate('Ultimate One Night Werewolf', 'Social deduction games suck', [categories[0],], 50, 3, callback);
+          gameCreate('Ultimate One Night Werewolf', 'Social deduction games suck.', [categories[0],], 25, 1, callback);
         },
+        function(callback) {
+          gameCreate('Exploding Kittens', 'Kittens were harmed in the making of this game.', [categories[0],], 20, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Avalon', `"I'm a spy, or am I?"`, [categories[0],], 25, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Skull', 'A bluffing game made out of coaster mats.', [categories[0],], 7, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Sushi Go', 'Deck drafting sushi game.', [categories[0], categories[1]], 10, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Monopoly', 'This game suckssss.', [categories[1],], 1, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Spot it', 'A fun, fast game about matching.', [categories[1],], 5, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Hanabi', `This game isn't really for kids..`, [categories[1],], 25, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Magic Maze', 'A game about a magical maze, I guess.', [categories[1],], 50, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Ghost Blitz', 'A speed game where you have to be the first to grab an item.', [categories[1],], 8, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Quirkle', 'Scrabble for dyslexic people.', [categories[2],], 25, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Splendor', `A great beginner's game about simple engine building.`, [categories[2],], 25, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Clank!', 'A deck building dungeon crawler.', [categories[2],], 500, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Dominion', 'A deck building engine builder.', [categories[2],], 50, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Carcassone', 'Build Carcassone with tiles.', [categories[2],], 25, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Tapestry', 'Has nothing to do with tapestries.', [categories[3],], 2.50, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Terraforming Mars', 'An epic game about terraforming Mars.', [categories[3],], 999.25, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Underwater Cities', 'Build cities UNDERWATER!', [categories[3],], 250, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Nemesis', 'A cooperative game in the Alien universe.', [categories[3],], 25, 1, callback);
+        },
+        function(callback) {
+          gameCreate('Innovation', 'A card game with infinite replayabilibty!', [categories[3],], 29.99, 1, callback);
+        },
+
         ],
         // optional callback
-        cb);
-}
-
-
-function createGameCopies(cb) {
-    async.parallel([
-        function(callback) {
-          gameCopyCreate(games[0], 'Available', callback)
-        },
-        function(callback) {
-          gameCopyCreate(games[0], 'Available', callback)
-        },
-        function(callback) {
-          gameCopyCreate(games[0], 'Available', callback)
-        }
-        ],
-        // Optional callback
         cb);
 }
 
