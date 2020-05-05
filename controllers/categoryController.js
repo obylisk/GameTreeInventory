@@ -7,14 +7,14 @@ var async = require('async');
 //XXXX ADD VALIDATORS?
 
 //Display list of all Categories
-exports.category_list = function(req, res, next) {Category.find()
-.populate("category")
-.sort([["name", "ascending"]])
-.exec(function (err, list_categories) {
-  if (err) {return next(err); }
-  //Successful so render
-  res.render("category_list", {title: "Category List", category_list: list_category });
-  });
+  exports.category_list = function(req, res, next){ Category.find()
+    .populate("category")
+    .sort([["name", "ascending"]])
+    .exec(function (err, list_categories) {
+      if (err) {return next(err); }
+      //Successful so render
+      res.render("category_list", {title: "Category List", category_list: list_category });
+    });
 };
 
 //Display detail page for a specific Category.
