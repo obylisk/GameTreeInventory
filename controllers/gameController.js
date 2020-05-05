@@ -38,7 +38,7 @@ exports.game_detail = function(req, res, next) {
 
     async.parallel({
         game: function(callback) {
-          Game.findById(req.params.id)
+          Game.find()
           .populate('category')
           .exec(callback);
         },

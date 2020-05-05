@@ -3,7 +3,7 @@ extends layout
 block content
   h1 Title: #{game.title}
   
-  p #[strong Summary:] #{game.summary}
+  p #[strong Description:] #{game.description}
   p #[strong Category:]&nbsp;
     each val, index in game.category
       a(href=val.url) #{val.name}
