@@ -13,10 +13,10 @@ var CategorySchema = new Schema(
 CategorySchema
 .virtual('url')
 .get(function () {
-  return '/invetory/categories/' + this._id;
+  return '/invetory/category/' + this._id;
 });
 
 
 
 //Export model
-module.exports = mongoose.model('Categories', CategorySchema);
+module.exports = mongoose.model('Category', CategorySchema);
