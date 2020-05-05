@@ -13,11 +13,8 @@ var async = require('async');
     .exec(function (err, list_categories) {
       if (err) {return next(err); }
       //Successful so render
-<<<<<<< HEAD
-      res.render("category_list", {title: "Category List", category_list: list_category });
-=======
+
       res.render("category_list", {title: "Category List", category_list: list_categories });
->>>>>>> notImplemented
     });
 };
 

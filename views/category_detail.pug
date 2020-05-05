@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1 Category: #{category.name}
+  
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Games
+    
+    dl
+      each game in category_games
+        dt 
+          a(href=game.url) #{game.title}
+        dd #{game.summary}
+        
+        hr
+      else
+        p This category has no games
+
+        hr
+        p
+          a(href=category.url+'/delete') Delete Category
+      
+      p
+        a(href=category.url+'/update') Update Category

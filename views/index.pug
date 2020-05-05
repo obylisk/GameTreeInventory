@@ -2,4 +2,16 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em Game Tree], a inventory website created by Obylisk.
+
+  h1 Inventory:
+
+  if error
+    p Error getting inventory.
+  else
+    p Game Tree has the following inventory:
+
+    ul
+      li #[strong Game List:] !{data.game_count}
+      li #[strong Categories:] !{data.category_count}
+      
