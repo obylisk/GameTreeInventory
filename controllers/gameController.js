@@ -23,8 +23,9 @@ exports.index = function(req,res) {
 //Display list of all Games.
 exports.game_list = function(req, res, next) {
 
-  Game.find({}, 'title game')
+  Game.find()
     .populate('title')
+    .sort([["name", "ascending"]])
     .exec(function (err, list_games) {
       if (err) { return next(err); }
       //Successful, so render
