@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var GameSchema = new Schema(
   {
+    _id: { type: Object },
     title: {type: String, required: true, max: 100},
     description: {type: String, required: false},
     category: [{type: Schema.Types.ObjectId, ref: 'Category'}],
