@@ -4,11 +4,11 @@ block content
   h1 Title: #{game.title}
   
   p #[strong Description:] #{game.description}
-  p #[strong Category:]&nbsp;
-    each val, index in game.category
-      a(href=val.url) #{val.name}
-      if index < game.category.length - 1
-        |,       
+  p #[strong Price: $] #{game.price}
+  p #[strong Number of Copies:] #{game.numberOfCopies}
+  p #[strong Category:]&nbsp; #{game.category}
+  
+         
           
         hr
         p
