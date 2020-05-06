@@ -36,11 +36,14 @@ exports.game_list = function(req, res, next) {
 //Display detail page for a specific Game.
 exports.game_detail = function(req, res, next) {
 
+    async.parallel({
+        game: function(callback) {
+          Game.find()
+          .populate('category')
+          .exec(callback);
+        },
 
-      Game.find()
-      .populate('game')
-      .populate('category')
-      .exec(function(err, results) {
+    }, function(err, results) {
         if(err) { return next(err); }
         if(results.game==null) { //No results.
             var err = new Error('Game not found.');
@@ -51,7 +54,7 @@ exports.game_detail = function(req, res, next) {
         res.render('game_detail', { title: results.game.title, game: results.game }
       );
     });
-  };
+};
 
 
 //XXXX Fill in CRUD code
